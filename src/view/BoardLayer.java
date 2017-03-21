@@ -12,6 +12,8 @@ public class BoardLayer extends JFrame{
 	private JComponent board;
 	private JComponent cross;
 	
+	public int pleaseWork;
+	
 	public BoardLayer(int boardHeight, int boardWidth, JComponent board, JComponent cross){
 		super("Saboteur");
 		this.setBoardHeight(boardHeight);

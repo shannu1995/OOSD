@@ -1,9 +1,15 @@
 package controllers;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Observable;
 
-public class SelectSquare implements MouseListener{
+import javax.swing.JLayeredPane;
+
+import view.BoardLayer;
+
+public class SelectSquare extends Observable implements MouseListener{
 	private int xPosition;
 	private int yPosition;
 	private int indWidth;
@@ -13,6 +19,7 @@ public class SelectSquare implements MouseListener{
 	private int totalWidth;
 	private int totalHeight;
 	private SaveCoordinates save;
+	private MouseEvent event;
 	
 	public SelectSquare(int getxPosition, int getyPosition, int indWidth, int indHeight, int rows, int columns,
 			int totalWidth, int totalHeight) {
@@ -93,8 +100,10 @@ public class SelectSquare implements MouseListener{
 	public void mouseClicked(MouseEvent event) {
 		int x = event.getX();
 		int y = event.getY();
+		this.setEvent(event);
+		setChanged();
+		notifyObservers();
 		System.out.println("X co-ordinate of click is "+x+" and Y co-oridante of click is "+y);
-		this.setSave(new SaveCoordinates(x, y));
 	}
 	
 	@Override
@@ -125,5 +134,11 @@ public class SelectSquare implements MouseListener{
 	}
 	public void setSave(SaveCoordinates save) {
 		this.save = save;
+	}
+	public MouseEvent getEvent() {
+		return event;
+	}
+	public void setEvent(MouseEvent event) {
+		this.event = event;
 	}
 }
