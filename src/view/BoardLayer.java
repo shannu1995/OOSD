@@ -4,6 +4,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+import controllers.SelectSquare;
+
 public class BoardLayer extends JFrame{
 	private int boardWidth;
 	private int boardHeight;

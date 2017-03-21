@@ -54,7 +54,14 @@ public class Creator extends JFrame{
 	    }
 	    crossComponent = new DrawCross(totalWidth, totalHeight,IND_WIDTH, IND_HEIGHT, FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, array, NUMBER_OF_SPOTS);   
 	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent);
-		layer.setVisible(true);
 	    
+		layer.setVisible(true);
+		((DrawRectangle) layer.getBoard()).getSelector().getSave().setX(0);
+		((DrawRectangle) layer.getBoard()).getSelector().getSave().setY(0);
+		int xPos = ((DrawRectangle) layer.getBoard()).getSelector().getSave().getX();
+		int yPos = ((DrawRectangle) layer.getBoard()).getSelector().getSave().getY();
+		while(true){
+			System.out.println(xPos + yPos);
+		}
 	}
 }

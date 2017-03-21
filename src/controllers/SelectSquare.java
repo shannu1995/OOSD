@@ -1,13 +1,9 @@
-package view;
+package controllers;
 
-import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.*;
-
-import controllers.SelectSquare;
-
-public class DrawRectangle extends JComponent{
-	
+public class SelectSquare implements MouseListener{
 	private int xPosition;
 	private int yPosition;
 	private int indWidth;
@@ -16,37 +12,19 @@ public class DrawRectangle extends JComponent{
 	private int columns;
 	private int totalWidth;
 	private int totalHeight;
-	private SelectSquare selector;
+	private SaveCoordinates save;
 	
-	public DrawRectangle(int xPosition, int yPosition, int width, int height, int rows,
-			int columns, int totalWidth, int totalHeight){
-		
+	public SelectSquare(int getxPosition, int getyPosition, int indWidth, int indHeight, int rows, int columns,
+			int totalWidth, int totalHeight) {
 		this.setTotalHeight(totalHeight);
 		this.setTotalWidth(totalWidth);
-		setSize(totalWidth, totalHeight);
 		this.setxPosition(xPosition);
 		this.setyPosition(yPosition);
 		this.setRows(rows);
 		this.setColumns(columns);
-		setIndWidth(width);
-		setIndHeight(height);
-		addActionListener();
+		setIndWidth(indWidth);
+		setIndHeight(indHeight);
 	}
-	public void addActionListener(){
-		SelectSquare selector = new SelectSquare(getxPosition(), getyPosition(), getIndWidth(),
-				getIndHeight(), getRows(), getColumns(), getTotalWidth(), getTotalHeight());
-		setSelector(selector);
-		addMouseListener(selector);
-	}
-	public void paint(Graphics g){
-		System.out.println("Being painted");
-		for(int j = 0; j < columns; j++){
-			for(int i = 0; i < rows; i++){
-				g.drawRect(xPosition + indWidth*i, yPosition + indHeight*j, indWidth, indHeight);
-			}
-		}	
-	}
-
 	public int getyPosition() {
 		return yPosition;
 	}
@@ -110,10 +88,42 @@ public class DrawRectangle extends JComponent{
 	public void setTotalHeight(int totalHeight) {
 		this.totalHeight = totalHeight;
 	}
-	public SelectSquare getSelector() {
-		return selector;
+
+	@Override
+	public void mouseClicked(MouseEvent event) {
+		int x = event.getX();
+		int y = event.getY();
+		System.out.println("X co-ordinate of click is "+x+" and Y co-oridante of click is "+y);
+		this.setSave(new SaveCoordinates(x, y));
 	}
-	public void setSelector(SelectSquare selector) {
-		this.selector = selector;
+	
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public SaveCoordinates getSave() {
+		return save;
+	}
+	public void setSave(SaveCoordinates save) {
+		this.save = save;
 	}
 }
