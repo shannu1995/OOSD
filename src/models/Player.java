@@ -2,15 +2,12 @@ package models;
 
 import java.util.ArrayList;
 
-import controllers.PlayerPath;
 
 public abstract class Player {
 	private int id;
 	private int score;
-	private PlayerPath path;
-	private ArrayList<Card> deck;
 
-	public Player(int id, ArrayList<Card> deck){
+	public Player(int id){
 		this.setId(id);
 	}
 
@@ -28,21 +25,5 @@ public abstract class Player {
 
 	public void setScore(int score) {
 		this.score = score;
-	}
-
-	public PlayerPath getPath() {
-		return path;
-	}
-
-	public void setPath(PlayerPath path) {
-		this.path = path;
-	}
-
-	public ArrayList<Card> getDeck() {
-		return deck;
-	}
-
-	public void setDeck(ArrayList<Card> deck) {
-		this.deck = deck;
 	}
 }

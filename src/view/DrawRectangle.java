@@ -130,7 +130,6 @@ public class DrawRectangle extends JComponent implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		this.setBeingSelected(true);
-		System.out.println("LOL Clicked!");
 		if(o == this.getSelector()){
 			this.setClickXCoordinate(((this.getSelector().getEvent().getX() - 5) / this.indWidth) + 1);
 			this.setClickYCoordinate(((this.getSelector().getEvent().getY() - 5) / this.indHeight) + 1);

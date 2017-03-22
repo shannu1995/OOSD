@@ -10,14 +10,15 @@ import models.Board;
 import view.BoardLayer;
 import view.DrawCross;
 import view.DrawRectangle;
+import view.DrawStart;
 import view.OptionSelction; 
 
 public class Creator extends JFrame{
 	
 	public static final int IND_WIDTH = 50;
 	public static final int IND_HEIGHT = 50;
-	public static final int FIRST_RECTANGLE_X = 5;
-	public static final int FIRST_RECTANGLE_Y = 5;
+	public static final int FIRST_RECTANGLE_X = 15;
+	public static final int FIRST_RECTANGLE_Y = 15;
 	public static final int NUMBER_OF_SPOTS = 3;
 	
 	public static void main(String[] args) {
@@ -52,8 +53,9 @@ public class Creator extends JFrame{
 	    	System.out.println("One potential treasure spot is "+array[i][0]+
 	    			" from the top and "+array[i][1]+" from the left");
 	    }
-	    crossComponent = new DrawCross(totalWidth, totalHeight,IND_WIDTH, IND_HEIGHT, FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, array, NUMBER_OF_SPOTS);   
-	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent);
+	    crossComponent = new DrawCross(totalWidth, totalHeight,IND_WIDTH, IND_HEIGHT, FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, array, NUMBER_OF_SPOTS);
+	    JComponent start = new DrawStart(FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, IND_WIDTH, IND_HEIGHT, width, height);
+	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent, start);
 	    
 		layer.setVisible(true);
 		}

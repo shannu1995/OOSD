@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Worker extends Player{
 	private int positionOfVictory;
 	public Worker(int id, ArrayList<Card> deck) {
-		super(id, deck);
+		super(id);
 	}
 	
 	public int getPositionOfVictory() {
