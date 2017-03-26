@@ -29,7 +29,7 @@ public class BoardLayer extends JFrame{
 		JLayeredPane layers = getLayeredPane();
 		layers.add(board, new Integer(1));
 		layers.add(cross, new Integer(2));
-		layers.add(start, new Integer(3));
+		layers.add(start, new Integer(2));
 	}
 
 	public int getBoardWidth() {

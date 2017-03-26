@@ -1,13 +1,8 @@
 package controllers;
 
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
-
-import javax.swing.JLayeredPane;
-
-import view.BoardLayer;
 
 public class SelectSquare extends Observable implements MouseListener{
 	private int xPosition;
@@ -18,7 +13,6 @@ public class SelectSquare extends Observable implements MouseListener{
 	private int columns;
 	private int totalWidth;
 	private int totalHeight;
-	private SaveCoordinates save;
 	private MouseEvent event;
 	
 	public SelectSquare(int getxPosition, int getyPosition, int indWidth, int indHeight, int rows, int columns,
@@ -128,12 +122,6 @@ public class SelectSquare extends Observable implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}
-	public SaveCoordinates getSave() {
-		return save;
-	}
-	public void setSave(SaveCoordinates save) {
-		this.save = save;
 	}
 	public MouseEvent getEvent() {
 		return event;

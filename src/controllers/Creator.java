@@ -39,10 +39,9 @@ public class Creator extends JFrame{
 		int width = Integer.parseInt(swidth);
 		int height = Integer.parseInt(sheight);
 		int totalWidth = IND_WIDTH * 2 * width;
-		int totalHeight = IND_HEIGHT * 2 * height;
-		
+		int totalHeight = IND_HEIGHT * 2 * height;	
 		System.out.println("You selected a grid of width: "+ width+" and height: "+ height +"\nNumber of players is: "+players);
-		Board gameBoard = new Board(width, height);
+		
 	    JComponent boardComponent = new DrawRectangle(FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, IND_WIDTH, IND_HEIGHT, height, width, totalWidth, totalHeight);
 	    JComponent crossComponent = null;
 	    
@@ -58,5 +57,6 @@ public class Creator extends JFrame{
 	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent, start);
 	    
 		layer.setVisible(true);
+		Board gameBoard = new Board(layer);
 		}
 	}
