@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 
 import controllers.SelectSquare;
 
-public class DrawRectangle extends JComponent implements Observer{
+public class DrawRectangle extends JComponent{
 	
 	private int xPosition;
 	private int yPosition;
@@ -20,10 +20,6 @@ public class DrawRectangle extends JComponent implements Observer{
 	private int totalWidth;
 	private int totalHeight;
 	private SelectSquare selector;
-	
-	private int clickXCoordinate;
-	private int clickYCoordinate;
-	private boolean beingSelected;
 	
 	public DrawRectangle(int xPosition, int yPosition, int width, int height, int rows,
 			int columns, int totalWidth, int totalHeight){
@@ -44,7 +40,6 @@ public class DrawRectangle extends JComponent implements Observer{
 				getIndHeight(), getRows(), getColumns(), getTotalWidth(), getTotalHeight());
 		setSelector(selector);
 		addMouseListener(selector);
-		selector.addObserver(this);
 	}
 	public Event dispatchEvent(Event e){
 		return e;
@@ -127,31 +122,5 @@ public class DrawRectangle extends JComponent implements Observer{
 	public void setSelector(SelectSquare selector) {
 		this.selector = selector;
 	}
-	@Override
-	public void update(Observable o, Object arg) {
-		this.setBeingSelected(true);
-		if(o == this.getSelector()){
-			this.setClickXCoordinate(((this.getSelector().getEvent().getX() - 5) / this.indWidth) + 1);
-			this.setClickYCoordinate(((this.getSelector().getEvent().getY() - 5) / this.indHeight) + 1);
-			System.out.println(clickXCoordinate +" , "+ clickYCoordinate);
-		}
-	}
-	public int getClickXCoordinate() {
-		return clickXCoordinate;
-	}
-	public void setClickXCoordinate(int clickXCoordinate) {
-		this.clickXCoordinate = clickXCoordinate;
-	}
-	public int getClickYCoordinate() {
-		return clickYCoordinate;
-	}
-	public void setClickYCoordinate(int clickYCoordinate) {
-		this.clickYCoordinate = clickYCoordinate;
-	}
-	public boolean isBeingSelected() {
-		return beingSelected;
-	}
-	public void setBeingSelected(boolean beingSelected) {
-		this.beingSelected = beingSelected;
-	}
+
 }

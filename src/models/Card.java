@@ -3,8 +3,9 @@ package models;
 public abstract class Card {
 	private int xPosition;
 	private int yPosition;
+	private String type;
 	
-	public Card(int xPosition, int yPosition){
+	public Card(int xPosition, int yPosition, String type){
 		this.setxPosition(xPosition);
 		this.setyPosition(yPosition);
 	}
@@ -23,5 +24,13 @@ public abstract class Card {
 
 	public void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

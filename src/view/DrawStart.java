@@ -26,34 +26,35 @@ public class DrawStart extends JComponent{
 	public int[] getPositions(){
 		int x;
 		int y;
-		if((this.getRows() % 2) == 0 && this.getColumns() == 0){
+		if((this.getRows() % 2) == 0 && (this.getColumns() % 2) == 0){
 			x = this.getRows() / 2;
 			y = this.getColumns() / 2;
 		}
-		else if((this.getRows() % 2) == 0 && this.getColumns() != 0){
+		else if((this.getRows() % 2) == 0 && (this.getColumns() % 2) != 0){
 			x = this.getRows() / 2;
 			y = (this.getColumns() / 2) - 1 ;
 		}
-		else if((this.getRows() % 2) != 0 && this.getColumns() == 0){
+		else if((this.getRows() % 2) != 0 && (this.getColumns() % 2 )== 0){
 			x = (this.getRows() / 2) - 1;
 			y = this.getColumns() / 2;
 		}
 		else{
-			x = (this.getRows() / 2) - 1;
-			y = (this.getColumns() / 2) - 1;
+			x = (this.getRows() / 2) + 1;
+			y = (this.getColumns() / 2) + 1;
 		}
 		int[] array = new int[2];
 		array[0] = x;
 		array[1] = y;
+		System.out.println(array[0] + " from left "+array[1]+ " from top");
 		return array;
 	}
 	public void paint(Graphics g){
 		int[] array = this.positions;
-		System.out.println("This is being executed");
-		g.drawLine((xPosition + (array[0] * indWidth) + (indWidth/2)), yPosition + (array[1] * indHeight), 
-				(xPosition + (array[0] * indWidth) + (indWidth/2)), yPosition + ((array[1] - 1) * indHeight));
-		g.drawLine(xPosition + (array[0] * indWidth), yPosition + ((array[1] - 1) * indHeight) + (indHeight/2), xPosition + ((array[0] + 1) * indWidth) , 
-				yPosition + ((array[1] - 1) * indHeight) + (indHeight/2));
+		g.drawLine(xPosition + ((array[1] - 1) * indWidth) + (indWidth / 2), yPosition + ((array[0] - 1) * indHeight),
+				(xPosition + ((array[1] - 1) * indWidth) + (indWidth / 2)), yPosition + (array[0]* indHeight));
+		
+		g.drawLine(xPosition + ((array[1] - 1) * indWidth), yPosition + ((array[0] - 1) * indHeight + (indHeight/2)),
+				xPosition + (array[1] * indWidth), yPosition + ((array[0] - 1) * indHeight + (indHeight/2)));
 	}
 
 	public int getIndWidth() {

@@ -11,7 +11,8 @@ import view.BoardLayer;
 import view.DrawCross;
 import view.DrawRectangle;
 import view.DrawStart;
-import view.OptionSelction; 
+import view.OptionSelction;
+import view.PlayerView; 
 
 public class Creator extends JFrame{
 	
@@ -27,6 +28,8 @@ public class Creator extends JFrame{
 		OptionSelction options = new OptionSelction();
 		JPanel optionsPanel = new JPanel();
 		options.showOptions(optionsPanel);
+		
+		boolean cardShowed = false;
 		
 		int players = Integer.parseInt(options.getPlayerCountSelected());
 		
@@ -45,18 +48,20 @@ public class Creator extends JFrame{
 	    JComponent boardComponent = new DrawRectangle(FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, IND_WIDTH, IND_HEIGHT, height, width, totalWidth, totalHeight);
 	    JComponent crossComponent = null;
 	    
+	    int[][] treasureArray = new int[NUMBER_OF_SPOTS][2];
 	    GetTreasurePositions spots = new GetTreasurePositions(height, width);
-	    int[][] array = new int[NUMBER_OF_SPOTS][2];
+	    
 	    for(int i = 0; i < NUMBER_OF_SPOTS; i++){
-	    	array[i] = spots.selectTreasureSpots();
-	    	System.out.println("One potential treasure spot is "+array[i][0]+
-	    			" from the top and "+array[i][1]+" from the left");
+	    	treasureArray [i] = spots.selectTreasureSpots();
+	    	System.out.println("One potential treasure spot is "+treasureArray[i][1]+
+	    			" from the top and "+treasureArray[i][0]+" from the left");
 	    }
-	    crossComponent = new DrawCross(totalWidth, totalHeight,IND_WIDTH, IND_HEIGHT, FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, array, NUMBER_OF_SPOTS);
+	    crossComponent = new DrawCross(totalWidth, totalHeight,IND_WIDTH, IND_HEIGHT, FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, treasureArray, NUMBER_OF_SPOTS);
 	    JComponent start = new DrawStart(FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, IND_WIDTH, IND_HEIGHT, width, height);
-	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent, start);
+	    JComponent playerView = new PlayerView(totalHeight, IND_WIDTH, IND_HEIGHT);
+	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent, start, playerView);
 	    
 		layer.setVisible(true);
-		Board gameBoard = new Board(layer);
+		Board gameBoard = new Board(layer, treasureArray);
 		}
 	}
