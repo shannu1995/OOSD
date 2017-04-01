@@ -38,34 +38,53 @@ public class PlayerView extends JComponent{
 			case 2:
 				this.setType("LINE");
 				System.out.println("Building a line");
-				g.drawLine(100, 100 + 100 + (this.getBoardHeight()/2) + (this.getIndHeight()/2), 100, 100 + (this.getBoardHeight()/2) + (3 * this.getIndHeight()/2));
-				g.drawLine(150 - this.getIndWidth()/2, 100 + 100 + this.getBoardHeight()/2, 150 + this.getIndWidth()/2, 100 + 100 + this.getBoardHeight()/2);
+				g.drawLine(100, 200 + (this.getBoardHeight()/2) + (this.getIndHeight()/2), 100, 100 + (this.getBoardHeight()/2) + (3 * this.getIndHeight()/2));
+				g.drawLine(150 - this.getIndWidth()/2, 200 + this.getBoardHeight()/2, 150 + this.getIndWidth()/2, 200 + this.getBoardHeight()/2);
 				break;
 			case 3:
 				this.setType("SEVEN");
 				System.out.println("Building a seven");
 				
-				g.drawLine(100 - this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2, 100, 100 + 100 + 100 + this.getBoardHeight()/2);
-				g.drawLine(100, 100 + 100 + 100 + this.getBoardHeight()/2, 100, 100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(100 - this.getIndWidth()/2, 300 + this.getBoardHeight()/2, 100, 300 + this.getBoardHeight()/2);
+				g.drawLine(100, 300 + this.getBoardHeight()/2, 100, 300 + this.getBoardHeight()/2 + this.getIndHeight()/2);
 				
-				g.drawLine(150 + this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2, 150 + this.getIndWidth()/2, 
-						100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2);
-				g.drawLine(150 + this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2, 150,
-						100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(150 + this.getIndWidth()/2, 300 + this.getBoardHeight()/2, 150 + this.getIndWidth()/2, 
+						300 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(150 + this.getIndWidth()/2, 300 + this.getBoardHeight()/2 + this.getIndHeight()/2, 150,
+						300 + this.getBoardHeight()/2 + this.getIndHeight()/2);
 				
-				g.drawLine(200 + this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2, 200 + this.getIndWidth()/2, 
-						100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2);
-				g.drawLine(200 + this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2, 200 + this.getIndWidth(),
-						100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(200 + this.getIndWidth()/2, 300 + this.getBoardHeight()/2, 200 + this.getIndWidth()/2, 
+						300 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(200 + this.getIndWidth()/2, 300 + this.getBoardHeight()/2 + this.getIndHeight()/2, 200 + this.getIndWidth(),
+						300 + this.getBoardHeight()/2 + this.getIndHeight()/2);
 				
-				g.drawLine(250 + this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2, 250 + this.getIndWidth()/2, 
-						100 + 100 + 100 + this.getBoardHeight()/2 + this.getIndHeight()/2);
-				g.drawLine(250 + this.getIndWidth()/2, 100 + 100 + 100 + this.getBoardHeight()/2, 250 + this.getIndWidth(), 
-						100 + 100 + 100 + this.getBoardHeight()/2);
+				g.drawLine(250 + this.getIndWidth()/2, 300 + this.getBoardHeight()/2, 250 + this.getIndWidth()/2, 
+						300 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(250 + this.getIndWidth()/2, 300 + this.getBoardHeight()/2, 250 + this.getIndWidth(), 
+						300 + this.getBoardHeight()/2);
 				break;
 			case 4:
 				this.setType("T");
 				System.out.println("Building a t");
+				g.drawLine(100 - this.getIndWidth()/2, 400 + this.getBoardHeight()/2 + this.getIndHeight()/2, 100 - this.getIndWidth()/2,
+						400 + this.getBoardHeight()/2 + this.getIndHeight());
+				g.drawLine(100 - this.getIndWidth(), 400 + this.getBoardHeight()/2 + this.getIndHeight()/2, 100,
+						400 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				
+				g.drawLine(150 - this.getIndWidth()/2, 400 + this.getBoardHeight()/2 + this.getIndHeight()/2, 150 - this.getIndWidth()/2,
+						400 + this.getBoardHeight()/2 + this.getIndHeight());
+				g.drawLine(150 - this.getIndWidth(), 400 + this.getBoardHeight()/2 + this.getIndHeight(), 150,
+						400 + this.getBoardHeight()/2 + this.getIndHeight());
+						
+				g.drawLine(200 - this.getIndWidth(), 400 + this.getBoardHeight()/2 + this.getIndHeight()/2, 200 - this.getIndWidth()/2,
+						400 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(200 - this.getIndWidth()/2, 400 + this.getBoardHeight()/2, 200 - this.getIndWidth()/2,
+						400 + this.getBoardHeight()/2 + this.getIndHeight());
+						
+				g.drawLine(250 - this.getIndWidth(), 400 + this.getBoardHeight()/2 + this.getIndHeight()/2, 250 - this.getIndWidth()/2,
+						400 + this.getBoardHeight()/2 + this.getIndHeight()/2);
+				g.drawLine(250 - this.getIndWidth(), 400 + this.getBoardHeight()/2, 250 - this.getIndWidth(),
+						400 + this.getBoardHeight()/2 + this.getIndHeight());
 				break;
 			default:
 				System.out.println("Should not see this");
