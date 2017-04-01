@@ -35,8 +35,6 @@ public class Board implements Observer{
 	@Override
 	public void update(Observable o, Object arg1) {
 		this.setBeingSelected(true);
-		//2,12
-		//3,12
 		if(o == ((DrawRectangle) this.getLayer().getBoard()).getSelector()){
 			this.setClickXCoordinate(((((DrawRectangle) this.getLayer().getBoard()).getSelector()).getEvent().getX() - 5)
 					/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
@@ -44,9 +42,32 @@ public class Board implements Observer{
 					/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
 			System.out.println(clickXCoordinate +" , "+ clickYCoordinate);
 			if(this.getClickYCoordinate() > this.getRows()){
-				if(this.getClickXCoordinate() == 2 || this.getClickXCoordinate() == 3){
+				if(this.getClickYCoordinate() <= this.getRows() + 3){
 					System.out.println("You selected a PLUS!");
-					System.out.println("Now select an empty slot");
+				}
+				else if(this.getClickYCoordinate() <= this.getRows() + 5){
+					System.out.println("You selected a LINE!");
+					if(this.getClickXCoordinate() == 2){
+						System.out.println(" and it is vertical");
+					}
+					else{
+						System.out.println(" and it is horizontal");
+					}
+				}
+				else if(this.getClickYCoordinate() <= this.getRows() + 7){
+					System.out.println("You selected a SEVEN!");
+					if(this.getClickXCoordinate() == 2){
+						System.out.println(" and it is upright");	
+					}
+					else if(this.getClickXCoordinate() <= 4){
+						System.out.println(" and it is upside down");
+					}
+					else if(this.getClickXCoordinate() == 5){
+						System.out.println(" and it is upside down with reverse horizontal");
+					}
+					else{
+						System.out.println(" and it is a mirror image");
+					}
 				}
 			}
 		}
