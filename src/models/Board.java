@@ -1,11 +1,19 @@
 package models;
 
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import view.*;
+import javax.swing.JFrame;
+
 import controllers.SelectSquare;
+import view.BoardLayer;
+import view.DrawPathCard;
+import view.DrawRectangle;
+import view.DrawStart;
+import view.PlayerView;
+import view.PositionSelection;
 
 public class Board implements Observer{
 	private BoardLayer layer;
@@ -18,15 +26,22 @@ public class Board implements Observer{
 	private String[][] board;
 	private int[][] treasureArray;
 	private int[] startSpot;
+	private PositionSelection positions;
+	private ArrayList<DrawPathCard> pathCards;
+	private DrawPathCard card;
+	private int playerCount;
 			
-	public Board(BoardLayer layer, int[][] treasureArray){
+	public Board(BoardLayer layer, int[][] treasureArray, int playerCount){
 	
 		this.setLayer(layer);
 		SelectSquare select = (((DrawRectangle) this.getLayer().getBoard()).getSelector());
 		select.addObserver(this);
 		this.setRows(((DrawRectangle) this.getLayer().getBoard()).getRows());
 		this.setColumns(((DrawRectangle) this.getLayer().getBoard()).getColumns());
-		
+		this.setPlayerCount(playerCount);
+		ArrayList<DrawPathCard> cardsList = new ArrayList<DrawPathCard>();
+		this.setPathCards(cardsList);
+		((PlayerView) this.getLayer().getPlayer()).setPlayer(1);
 		String[][] board = new String[this.getRows() + 1][this.getColumns() + 1];
 		this.setTreasureArray(treasureArray);	
 		this.setBoard(board);
@@ -35,43 +50,96 @@ public class Board implements Observer{
 	@Override
 	public void update(Observable o, Object arg1) {
 		this.setBeingSelected(true);
-		if(o == ((DrawRectangle) this.getLayer().getBoard()).getSelector()){
-			this.setClickXCoordinate(((((DrawRectangle) this.getLayer().getBoard()).getSelector()).getEvent().getX() - 5)
-					/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
-			this.setClickYCoordinate(((((DrawRectangle) this.getLayer().getBoard()).getSelector()).getEvent().getY() - 5)
-					/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
-			System.out.println(clickXCoordinate +" , "+ clickYCoordinate);
-			if(this.getClickYCoordinate() > this.getRows()){
-				if(this.getClickYCoordinate() <= this.getRows() + 3){
-					System.out.println("You selected a PLUS!");
-				}
-				else if(this.getClickYCoordinate() <= this.getRows() + 5){
-					System.out.println("You selected a LINE!");
-					if(this.getClickXCoordinate() == 2){
-						System.out.println(" and it is vertical");
+			if(o == ((DrawRectangle) this.getLayer().getBoard()).getSelector()){
+				this.setClickXCoordinate(((((DrawRectangle) this.getLayer().getBoard()).getSelector()).getEvent().getX() - 5)
+						/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
+				this.setClickYCoordinate(((((DrawRectangle) this.getLayer().getBoard()).getSelector()).getEvent().getY() - 5)
+						/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
+				System.out.println(clickXCoordinate +" , "+ clickYCoordinate);
+				
+				if(this.getClickYCoordinate() > this.getRows()){
+					if(this.getClickYCoordinate() <= this.getRows() + 3){
+						System.out.println("You selected a PLUS!");
+						card = new DrawPathCard("PLUS");
+					}
+					else if(this.getClickYCoordinate() <= this.getRows() + 5){
+						System.out.println("You selected a LINE!");
+						if(this.getClickXCoordinate() == 2){
+							System.out.println(" and it is vertical");
+							card = new DrawPathCard("VLINE");
+						}
+						else{
+							System.out.println(" and it is horizontal");
+							card = new DrawPathCard("HLINE");
+						}
+					}
+					else if(this.getClickYCoordinate() <= this.getRows() + 7){
+						System.out.println("You selected a SEVEN!");
+						if(this.getClickXCoordinate() == 2){
+							System.out.println(" and it is upright");
+							card = new DrawPathCard("USEVEN");
+						}
+						else if(this.getClickXCoordinate() <= 4){
+							System.out.println(" and it is upside down");
+							card = new DrawPathCard("UDSEVEN");
+						}
+						else if(this.getClickXCoordinate() == 5){
+							System.out.println(" and it is upside down with reverse horizontal");
+							card = new DrawPathCard("UDRSEVEN");
+						}
+						else{
+							System.out.println(" and it is a mirror image");
+							card = new DrawPathCard("UMSEVEN");
+						}
 					}
 					else{
-						System.out.println(" and it is horizontal");
+						System.out.println("You selected a T!");
+						if(this.getClickXCoordinate() <= 2){
+							System.out.println("and it is Upright!");
+							card = new DrawPathCard("UT");
+						}
+						else if(this.getClickXCoordinate() <= 4){
+							System.out.println("and it is Upside Down!");
+							card = new DrawPathCard("UDT");
+						}
+						else if(this.getClickXCoordinate() <= 6){
+							System.out.println("and it is rotated colckwise");
+							card = new DrawPathCard("CRT");
+						}
+						else{
+							System.out.println("and it is rotated anti-colckwise");
+							card = new DrawPathCard("ART");
+						}
 					}
-				}
-				else if(this.getClickYCoordinate() <= this.getRows() + 7){
-					System.out.println("You selected a SEVEN!");
-					if(this.getClickXCoordinate() == 2){
-						System.out.println(" and it is upright");	
-					}
-					else if(this.getClickXCoordinate() <= 4){
-						System.out.println(" and it is upside down");
-					}
-					else if(this.getClickXCoordinate() == 5){
-						System.out.println(" and it is upside down with reverse horizontal");
-					}
-					else{
-						System.out.println(" and it is a mirror image");
-					}
+					PositionSelection positions = new PositionSelection();
+					JFrame optionsPanel = new JFrame();
+					positions.selectPosition(optionsPanel);
+					positions.addObserver(this);
+					this.setPositions(positions);
 				}
 			}
-		}
-		
+			else if(o == this.getPositions()){
+				int iterator;
+				System.out.println(this.getPositions().getxPos() + " from the left and "+this.getPositions().getyPos()+" from the top");
+				if(((PlayerView)this.getLayer().getPlayer()).getPlayer() < this.getPlayerCount()){
+					iterator = ((PlayerView)this.getLayer().getPlayer()).getPlayer();
+					iterator++;
+				}
+				else{
+					iterator = 1;
+				}
+				this.getCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
+				this.getCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
+				this.getCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
+				this.getCard().setIndWidth(((DrawRectangle) this.getLayer().getBoard()).getIndWidth());
+				
+				this.getCard().setxPosition(this.getPositions().getxPos());
+				this.getCard().setyPosition(this.getPositions().getyPos());
+				this.addCard(card);
+				this.getLayer().setPathCards(this.getPathCards());
+				((PlayerView)this.getLayer().getPlayer()).setPlayer(iterator);
+				this.getLayer().getPlayer().repaint();
+			}
 	}
 	public void updateBoard(String[][] board){
 		
@@ -159,5 +227,41 @@ public class Board implements Observer{
 	public void setStartSpot(int[] startSpot) {
 		this.startSpot = startSpot;
 	}
-	
+
+	public PositionSelection getPositions() {
+		return positions;
+	}
+
+	public void setPositions(PositionSelection positions) {
+		this.positions = positions;
+	}
+
+	public int getPlayerCount() {
+		return playerCount;
+	}
+
+	public void setPlayerCount(int playerCount) {
+		this.playerCount = playerCount;
+	}
+
+	public ArrayList<DrawPathCard> getPathCards() {
+		return pathCards;
+	}
+
+	public void setPathCards(ArrayList<DrawPathCard> pathCards) {
+		this.pathCards = pathCards;
+	}
+
+	public DrawPathCard getCard() {
+		return card;
+	}
+
+	public void setCard(DrawPathCard card) {
+		this.card = card;
+	}
+	public void addCard(DrawPathCard card){
+		ArrayList<DrawPathCard> cards = this.getPathCards();
+		cards.add(card);
+		this.setPathCards(cards);
+	}
 }

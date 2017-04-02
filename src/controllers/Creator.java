@@ -29,8 +29,6 @@ public class Creator extends JFrame{
 		JPanel optionsPanel = new JPanel();
 		options.showOptions(optionsPanel);
 		
-		boolean cardShowed = false;
-		
 		int players = Integer.parseInt(options.getPlayerCountSelected());
 		
 		String delimeter = "x";
@@ -62,6 +60,6 @@ public class Creator extends JFrame{
 	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent, start, playerView);
 	    
 		layer.setVisible(true);
-		Board gameBoard = new Board(layer, treasureArray);
+		Board gameBoard = new Board(layer, treasureArray, players);
 		}
 	}

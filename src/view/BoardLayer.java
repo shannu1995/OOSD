@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -13,7 +13,8 @@ public class BoardLayer extends JFrame{
 	private JComponent cross;
 	private JComponent start;
 	private JComponent player;
-	private JComponent DrawPathCard;
+	private ArrayList<DrawPathCard> pathCards;
+	private JLayeredPane layers;
 	
 	public int pleaseWork;
 	
@@ -29,18 +30,19 @@ public class BoardLayer extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(boardWidth, boardHeight);
 		
-		JLayeredPane layers = getLayeredPane();
-		layers.add(board, new Integer(1));
-		layers.validate();
+		this.layers = getLayeredPane();
+		this.layers.add(board, new Integer(1));
+		this.layers.validate();
 		
-		layers.add(cross, new Integer(2));
-		layers.validate();
+		this.layers.add(cross, new Integer(2));
+		this.layers.validate();
 		
-		layers.add(start, new Integer(2));
-		layers.validate();
+		this.layers.add(start, new Integer(2));
+		this.layers.validate();
 		
-		layers.add(player, new Integer(3));
-		layers.validate();
+		this.layers.add(player, new Integer(3));
+		this.layers.validate();
+		
 	}
 	public int getBoardWidth() {
 		return boardWidth;
@@ -88,5 +90,15 @@ public class BoardLayer extends JFrame{
 
 	public void setPlayer(JComponent player) {
 		this.player = player;
+	}
+	public ArrayList<DrawPathCard> getPathCards() {
+		return pathCards;
+	}
+	public void setPathCards(ArrayList<DrawPathCard> pathCards) {
+		for(int i = 0; i < pathCards.size(); i++){
+			System.out.println("Once");
+			this.layers.add(pathCards.get(i), new Integer(4));
+		}
+		this.pathCards = pathCards;
 	}
 }
