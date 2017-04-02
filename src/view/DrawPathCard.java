@@ -42,24 +42,92 @@ public class DrawPathCard extends JComponent{
 						this.getFirstRectangleY()+ ((this.getyPosition() - 1) * this.getIndHeight()+ (this.getIndHeight()/2)));
 				break;
 			case "USEVEN":
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight() + (this.getyPosition() - 1) * this.getIndHeight());
+				break;
+			case "UDSEVEN":
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
+						this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
+						(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
+						this.getFirstRectangleY() - this.getIndHeight()/2 + (this.getyPosition()* this.getIndHeight()));
+				break;
+			case "UDRSEVEN":
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
+						this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
+						(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
+						this.getFirstRectangleY() - this.getIndHeight()/2 + (this.getyPosition()* this.getIndHeight()));
+				break;
+			case "UMSEVEN":
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight() + (this.getyPosition() - 1) * this.getIndHeight());
+				break;
+			case "UT":
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight() + (this.getyPosition() - 1) * this.getIndHeight());
+				break;
+			case "UDT":
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
+						this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight());
+				break;
+			case "CRT":
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
 				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
 						this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
 						(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
 						this.getFirstRectangleY() + (this.getyPosition()* this.getIndHeight()));
 				break;
-			case "UDSEVEN":
-				break;
-			case "UDRSEVEN":
-				break;
-			case "UMSEVEN":
-				break;
-			case "UT":
-				break;
-			case "UDT":
-				break;
-			case "CRT":
-				break;
 			case "ART":
+				g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
+						this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
+						this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+				
+				g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
+						this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
+						(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
+						this.getFirstRectangleY() + (this.getyPosition() * this.getIndHeight()));
 				break;
 		}
 	}
