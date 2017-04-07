@@ -6,6 +6,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+import models.ActionCard;
+
 public class BoardLayer extends JFrame{
 	private int boardWidth;
 	private int boardHeight;
@@ -105,7 +107,14 @@ public class BoardLayer extends JFrame{
 	public ArrayList<DrawActionCard> getActionCards() {
 		return actionCards;
 	}
-	public void setActionCards(ArrayList<DrawActionCard> actionCards) {
-		this.actionCards = actionCards;
+	public void setActionCards(ArrayList<ActionCard> actionCards) {
+		ArrayList<DrawActionCard> viewActionCards = new ArrayList<DrawActionCard>();
+		for(int i = 0; i < actionCards.size(); i++){
+			viewActionCards.add(new DrawActionCard(actionCards.get(i)));
+		}
+		for(int i = 0; i < actionCards.size(); i++){
+			this.layers.add(viewActionCards.get(i), new Integer(5));
+		}
+		this.actionCards = viewActionCards;
 	}
 }

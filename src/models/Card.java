@@ -9,9 +9,8 @@ public abstract class Card {
 	private int indWidth;
 	private int indHeight;
 	
-	public Card(int xPosition, int yPosition, String type){
-		this.setxPosition(xPosition);
-		this.setyPosition(yPosition);
+	public Card(String type){
+		this.setType(type);
 	}
 
 	public int getxPosition() {

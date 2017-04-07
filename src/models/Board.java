@@ -47,7 +47,8 @@ public class Board implements Observer{
 		this.setPlayerCount(playerCount);
 		ArrayList<DrawPathCard> pathCardsList = new ArrayList<DrawPathCard>();
 		this.setPathCards(pathCardsList);
-		
+		ArrayList<ActionCard> acionCardsList = new ArrayList<ActionCard>();
+		this.setActionCards(acionCardsList);
 
 		((PlayerView) this.getLayer().getPlayer()).setPlayer(1);
 		String[][] board = new String[this.getRows() + 1][this.getColumns() + 1];
@@ -70,6 +71,7 @@ public class Board implements Observer{
 					if(this.getClickYCoordinate() <= 2){
 						System.out.println("You selected a PLUS!");
 						pathCard = new DrawPathCard("PLUS", true);
+						this.cardType = "PATH";
 					}
 					else if(this.getClickYCoordinate() <= 4){
 						System.out.println("You selected a LINE!");
@@ -123,7 +125,31 @@ public class Board implements Observer{
 						}
 						this.cardType = "PATH";
 					}
-					else{
+					else {
+						if(this.getClickYCoordinate() <= 8){
+							System.out.println("You selected a BOMB!");
+							this.actionCard = new ActionCard("BOMB");
+						}
+						else if(this.getClickYCoordinate() <= 9){
+							System.out.println("You selected a BOMB DEFUSE!");
+							this.actionCard = new ActionCard("DBOMB");
+						}
+						else if(this.getClickYCoordinate() <= 10){
+							System.out.println("You selected a SPILL!");
+							this.actionCard = new ActionCard("SPILL");
+						}
+						else if(this.getClickYCoordinate() <= 11){
+							System.out.println("You selected a SPILL CLEANER!");
+							this.actionCard = new ActionCard("CSPILL");
+						}
+						else if(this.getClickYCoordinate() <= 12){
+							System.out.println("You selected a REMOVE PATH!");
+							this.actionCard = new ActionCard("RMP");
+						}
+						else {
+							System.out.println("You selected a ROTATE PATH!");
+							this.actionCard = new ActionCard("RTP");
+						}
 						this.cardType = "ACTION";
 					}
 					PositionSelection positions = new PositionSelection();
@@ -143,7 +169,7 @@ public class Board implements Observer{
 				else{
 					iterator = 1;
 				}
-				if(this.cardType.equals("PATH")){	
+				if(this.cardType.equals("PATH")){
 					this.getPathCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
 					this.getPathCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
 					this.getPathCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
@@ -155,16 +181,19 @@ public class Board implements Observer{
 					this.getLayer().setPathCards(this.getPathCards());
 				}
 				else if(this.cardType.equals("ACTION")){
-					this.getActionCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
-					this.getActionCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
-					this.getActionCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
-					this.getActionCard().setIndWidth(((DrawRectangle) this.getLayer().getBoard()).getIndWidth());
-					
-					this.getActionCard().setxPosition(this.getPositions().getxPos());
-					this.getActionCard().setyPosition(this.getPositions().getyPos());
-					/*Inportant*/
-					this.addActionCard(actionCard);
-					this.getLayer().setPathCards(this.getPathCards());
+					if(this.getBoard()[this.getPositions().getyPos() - 1][this.getPositions().getxPos() - 1] == "PATH"){
+						this.getActionCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
+						this.getActionCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
+						this.getActionCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
+						this.getActionCard().setIndWidth(((DrawRectangle) this.getLayer().getBoard()).getIndWidth());
+						
+						this.getActionCard().setxPosition(this.getPositions().getxPos());
+						this.getActionCard().setyPosition(this.getPositions().getyPos());
+						this.addActionCard(this.actionCard);
+						this.getLayer().setActionCards(this.getActionCards());	
+					}else{
+						this.cardType = "EMPTY";
+					}
 				}
 				this.updateBoard(this.getPositions().getxPos(), this.getPositions().getyPos(), cardType);
 				((PlayerView)this.getLayer().getPlayer()).setPlayer(iterator);
@@ -225,8 +254,6 @@ public class Board implements Observer{
 	{
 		int x = this.getTreasureArray()[i][0];
 		int y = this.getTreasureArray()[i][1];
-		System.out.print( x + ", ");
-		System.out.println(y);
 		board[y - 1][x - 1] = "SPOT";
 	}
 	this.setStartSpot(((DrawStart) this.getLayer().getStart()).getPositions());
