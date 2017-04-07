@@ -14,6 +14,7 @@ public class BoardLayer extends JFrame{
 	private JComponent start;
 	private JComponent player;
 	private ArrayList<DrawPathCard> pathCards;
+	private ArrayList<DrawActionCard> actionCards;
 	private JLayeredPane layers;
 	
 	public int pleaseWork;
@@ -100,5 +101,11 @@ public class BoardLayer extends JFrame{
 			this.layers.add(pathCards.get(i), new Integer(4));
 		}
 		this.pathCards = pathCards;
+	}
+	public ArrayList<DrawActionCard> getActionCards() {
+		return actionCards;
+	}
+	public void setActionCards(ArrayList<DrawActionCard> actionCards) {
+		this.actionCards = actionCards;
 	}
 }

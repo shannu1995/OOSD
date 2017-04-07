@@ -4,6 +4,10 @@ public abstract class Card {
 	private int xPosition;
 	private int yPosition;
 	private String type;
+	private int firstRectangleX;
+	private int firstRectangleY;
+	private int indWidth;
+	private int indHeight;
 	
 	public Card(int xPosition, int yPosition, String type){
 		this.setxPosition(xPosition);
@@ -32,5 +36,37 @@ public abstract class Card {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public int getFirstRectangleX() {
+		return firstRectangleX;
+	}
+
+	public void setFirstRectangleX(int firstRectangleX) {
+		this.firstRectangleX = firstRectangleX;
+	}
+
+	public int getFirstRectangleY() {
+		return firstRectangleY;
+	}
+
+	public void setFirstRectangleY(int firstRectangleY) {
+		this.firstRectangleY = firstRectangleY;
+	}
+
+	public int getIndWidth() {
+		return indWidth;
+	}
+
+	public void setIndWidth(int indWidth) {
+		this.indWidth = indWidth;
+	}
+
+	public int getIndHeight() {
+		return indHeight;
+	}
+
+	public void setIndHeight(int indHeight) {
+		this.indHeight = indHeight;
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import controllers.SelectSquare;
 import view.BoardLayer;
+import view.DrawActionCard;
 import view.DrawPathCard;
 import view.DrawRectangle;
 import view.DrawStart;
@@ -29,6 +30,10 @@ public class Board implements Observer{
 	private PositionSelection positions;
 	private ArrayList<DrawPathCard> pathCards;
 	private DrawPathCard pathCard;
+
+	private ArrayList<ActionCard> actionCards;
+	private ActionCard actionCard;
+	
 	private int playerCount;
 	private String cardType = "EMPTY";
 			
@@ -40,8 +45,10 @@ public class Board implements Observer{
 		this.setRows(((DrawRectangle) this.getLayer().getBoard()).getRows());
 		this.setColumns(((DrawRectangle) this.getLayer().getBoard()).getColumns());
 		this.setPlayerCount(playerCount);
-		ArrayList<DrawPathCard> cardsList = new ArrayList<DrawPathCard>();
-		this.setPathCards(cardsList);
+		ArrayList<DrawPathCard> pathCardsList = new ArrayList<DrawPathCard>();
+		this.setPathCards(pathCardsList);
+		
+
 		((PlayerView) this.getLayer().getPlayer()).setPlayer(1);
 		String[][] board = new String[this.getRows() + 1][this.getColumns() + 1];
 		this.setTreasureArray(treasureArray);	
@@ -116,6 +123,9 @@ public class Board implements Observer{
 						}
 						this.cardType = "PATH";
 					}
+					else{
+						this.cardType = "ACTION";
+					}
 					PositionSelection positions = new PositionSelection();
 					JFrame optionsPanel = new JFrame();
 					positions.selectPosition(optionsPanel);
@@ -133,8 +143,7 @@ public class Board implements Observer{
 				else{
 					iterator = 1;
 				}
-				if(this.cardType == "PATH"){
-					
+				if(this.cardType.equals("PATH")){	
 					this.getPathCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
 					this.getPathCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
 					this.getPathCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
@@ -145,6 +154,18 @@ public class Board implements Observer{
 					this.addPathCard(pathCard);
 					this.getLayer().setPathCards(this.getPathCards());
 				}
+				else if(this.cardType.equals("ACTION")){
+					this.getActionCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
+					this.getActionCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
+					this.getActionCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
+					this.getActionCard().setIndWidth(((DrawRectangle) this.getLayer().getBoard()).getIndWidth());
+					
+					this.getActionCard().setxPosition(this.getPositions().getxPos());
+					this.getActionCard().setyPosition(this.getPositions().getyPos());
+					/*Inportant*/
+					this.addActionCard(actionCard);
+					this.getLayer().setPathCards(this.getPathCards());
+				}
 				this.updateBoard(this.getPositions().getxPos(), this.getPositions().getyPos(), cardType);
 				((PlayerView)this.getLayer().getPlayer()).setPlayer(iterator);
 				this.getLayer().getPlayer().repaint();
@@ -153,6 +174,7 @@ public class Board implements Observer{
 	public void updateBoard(int x, int y, String cardType){
 		String[][] board = this.board;
 		board[y - 1][x - 1] = cardType;
+		this.printBoard();
 	}
 	public BoardLayer getLayer() {
 		return layer;
@@ -265,6 +287,11 @@ public class Board implements Observer{
 		cards.add(card);
 		this.setPathCards(cards);
 	}
+	public void addActionCard(ActionCard card){
+		ArrayList<ActionCard> cards = this.getActionCards();
+		cards.add(card);
+		this.setActionCards(cards);
+	}
 	public void printBoard(){
 		for(int i = 0; i < this.getColumns(); i++){
 			for(int j = 0; j < this.getRows(); j++){
@@ -272,5 +299,21 @@ public class Board implements Observer{
 				}
 				System.out.println();
 			}
+	}
+
+	public ActionCard getActionCard() {
+		return actionCard;
+	}
+
+	public void setActionCard(ActionCard actionCard) {
+		this.actionCard = actionCard;
+	}
+
+	public ArrayList<ActionCard> getActionCards() {
+		return actionCards;
+	}
+
+	public void setActionCards(ArrayList<ActionCard> actionCards) {
+		this.actionCards = actionCards;
 	}
 }
