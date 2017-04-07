@@ -28,8 +28,9 @@ public class Board implements Observer{
 	private int[] startSpot;
 	private PositionSelection positions;
 	private ArrayList<DrawPathCard> pathCards;
-	private DrawPathCard card;
+	private DrawPathCard pathCard;
 	private int playerCount;
+	private String cardType = "EMPTY";
 			
 	public Board(BoardLayer layer, int[][] treasureArray, int playerCount){
 	
@@ -61,57 +62,59 @@ public class Board implements Observer{
 				if(this.getClickXCoordinate() > this.getColumns()){
 					if(this.getClickYCoordinate() <= 2){
 						System.out.println("You selected a PLUS!");
-						card = new DrawPathCard("PLUS", true);
+						pathCard = new DrawPathCard("PLUS", true);
 					}
 					else if(this.getClickYCoordinate() <= 4){
 						System.out.println("You selected a LINE!");
 						if(this.getClickXCoordinate() == this.getRows() + 2){
 							System.out.println(" and it is vertical");
-							card = new DrawPathCard("VLINE", true);
+							pathCard = new DrawPathCard("VLINE", true);
 						}
 						else{
 							System.out.println(" and it is horizontal");
-							card = new DrawPathCard("HLINE", true);
+							pathCard = new DrawPathCard("HLINE", true);
 						}
+						this.cardType = "PATH";
 					}
 					else if(this.getClickYCoordinate() <= 5){
 						System.out.println("You selected a SEVEN!");
 						if(this.getClickXCoordinate() == this.getRows() + 2){
 							System.out.println(" and it is upright");
-							card = new DrawPathCard("USEVEN", true);
+							pathCard = new DrawPathCard("USEVEN", true);
 						}
 						else if(this.getClickXCoordinate() == this.getRows() + 3){
 							System.out.println(" and it is upside down");
-							card = new DrawPathCard("UDSEVEN", true);
+							pathCard = new DrawPathCard("UDSEVEN", true);
 						}
 						else if(this.getClickXCoordinate() <= this.getRows() + 5){
 							System.out.println(" and it is upside down with reverse horizontal");
-							card = new DrawPathCard("UDRSEVEN", true);
+							pathCard = new DrawPathCard("UDRSEVEN", true);
 						}
 						else{
 							System.out.println(" and it is a mirror image");
-							card = new DrawPathCard("UMSEVEN", true);
+							pathCard = new DrawPathCard("UMSEVEN", true);
 						}
+						this.cardType = "PATH";
 					}
-					else{
+					else if (this.getClickYCoordinate() <= 7){
 						System.out.println("You selected a T!");
 						if(this.getClickXCoordinate() <= this.getRows() + 3){
 							System.out.println("and it is Upright!");
-							card = new DrawPathCard("UT", true);
+							pathCard = new DrawPathCard("UT", true);
 						}
 						else if(this.getClickXCoordinate() <= this.getRows() + 5){
 							System.out.println("and it is Upside Down!");
-							card = new DrawPathCard("UDT", true);
+							pathCard = new DrawPathCard("UDT", true);
 						}
 						else if(this.getClickXCoordinate() <= this.getRows() + 6){
 							System.out.println("and it is rotated colckwise");
-							card = new DrawPathCard("CRT", true);
+							pathCard = new DrawPathCard("CRT", true);
 						}
 						else{
 							System.out.println("and it is rotated anti-colckwise");
-							card = new DrawPathCard("ART", true);
+							pathCard = new DrawPathCard("ART", true);
 						}
-
+						this.cardType = "PATH";
 					}
 					PositionSelection positions = new PositionSelection();
 					JFrame optionsPanel = new JFrame();
@@ -130,21 +133,26 @@ public class Board implements Observer{
 				else{
 					iterator = 1;
 				}
-				this.getCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
-				this.getCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
-				this.getCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
-				this.getCard().setIndWidth(((DrawRectangle) this.getLayer().getBoard()).getIndWidth());
-				
-				this.getCard().setxPosition(this.getPositions().getxPos());
-				this.getCard().setyPosition(this.getPositions().getyPos());
-				this.addCard(card);
-				this.getLayer().setPathCards(this.getPathCards());
+				if(this.cardType == "PATH"){
+					
+					this.getPathCard().setFirstRectangleX(((DrawRectangle)this.getLayer().getBoard()).getxPosition());
+					this.getPathCard().setFirstRectangleY(((DrawRectangle)this.getLayer().getBoard()).getyPosition());
+					this.getPathCard().setIndHeight(((DrawRectangle) this.getLayer().getBoard()).getIndHeight());
+					this.getPathCard().setIndWidth(((DrawRectangle) this.getLayer().getBoard()).getIndWidth());
+					
+					this.getPathCard().setxPosition(this.getPositions().getxPos());
+					this.getPathCard().setyPosition(this.getPositions().getyPos());
+					this.addPathCard(pathCard);
+					this.getLayer().setPathCards(this.getPathCards());
+				}
+				this.updateBoard(this.getPositions().getxPos(), this.getPositions().getyPos(), cardType);
 				((PlayerView)this.getLayer().getPlayer()).setPlayer(iterator);
 				this.getLayer().getPlayer().repaint();
 			}
 	}
-	public void updateBoard(String[][] board){
-		
+	public void updateBoard(int x, int y, String cardType){
+		String[][] board = this.board;
+		board[y - 1][x - 1] = cardType;
 	}
 	public BoardLayer getLayer() {
 		return layer;
@@ -202,16 +210,7 @@ public class Board implements Observer{
 	this.setStartSpot(((DrawStart) this.getLayer().getStart()).getPositions());
 	int[] array = this.getStartSpot();
 	board[array[1]][array[0] - 1] = "PLUS";
-	System.out.println(this.getColumns());
-	System.out.println(this.getRows());
-	
-		for(int i = 0; i < this.getColumns(); i++){
-			for(int j = 0; j < this.getRows(); j++){
-					System.out.print(board[i][j]+" , ");
-				}
-				System.out.println();
-			}
-			this.board = board;
+	this.board = board;
 	}
 
 	public int[][] getTreasureArray() {
@@ -254,16 +253,24 @@ public class Board implements Observer{
 		this.pathCards = pathCards;
 	}
 
-	public DrawPathCard getCard() {
-		return card;
+	public DrawPathCard getPathCard() {
+		return pathCard;
 	}
 
 	public void setCard(DrawPathCard card) {
-		this.card = card;
+		this.pathCard = card;
 	}
-	public void addCard(DrawPathCard card){
+	public void addPathCard(DrawPathCard card){
 		ArrayList<DrawPathCard> cards = this.getPathCards();
 		cards.add(card);
 		this.setPathCards(cards);
+	}
+	public void printBoard(){
+		for(int i = 0; i < this.getColumns(); i++){
+			for(int j = 0; j < this.getRows(); j++){
+					System.out.print(board[i][j]+" , ");
+				}
+				System.out.println();
+			}
 	}
 }

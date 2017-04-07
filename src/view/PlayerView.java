@@ -30,7 +30,7 @@ public class PlayerView extends JComponent{
 		this.boardHeight = boardHeight;
 	}
 	public void paint(Graphics g){
-		int random = 1 + (int)(Math.random() * ((4 - 1) + 1));
+		int random = 1 + (int)(Math.random() * ((10 - 1) + 1));
 		g.drawString("Player "+this.getPlayer()+"\'s turn", this.getBoardWidth()/2 + 100, 10);
 		switch(random){
 			case 1:
@@ -65,8 +65,8 @@ public class PlayerView extends JComponent{
 				this.setType("T");
 				System.out.println("Building a t");						
 								
-				g.drawLine(100 + (this.getBoardWidth()/2), 300 + (this.getIndHeight()/2), 100 + (this.getBoardWidth()/2), 300 + (this.getIndHeight()));
-				g.drawLine(100 + this.getBoardWidth()/2 - this.getIndWidth()/2, 300 + this.getIndHeight()/2, 100 + this.getBoardWidth()/2 + this.getIndWidth()/2,
+			g.drawLine(100 + (this.getBoardWidth()/2), 300 + (this.getIndHeight()/2), 100 + (this.getBoardWidth()/2), 300 + (this.getIndHeight()));
+			g.drawLine(100 + this.getBoardWidth()/2 - this.getIndWidth()/2, 300 + this.getIndHeight()/2, 100 + this.getBoardWidth()/2 + this.getIndWidth()/2,
 			 300	+ this.getIndHeight()/2);
 			
 			g.drawLine(200 + (this.getBoardWidth()/2), 300 + (this.getIndHeight()/2), 200 + (this.getBoardWidth()/2), 300 + (this.getIndHeight()));
@@ -80,6 +80,24 @@ public class PlayerView extends JComponent{
 			g.drawLine(400 + (this.getBoardWidth()/2) - this.getIndWidth()/2, 300 , 400 + (this.getBoardWidth()/2) - this.getIndWidth()/2, 300 + (this.getIndHeight()));
 			g.drawLine(400 + this.getBoardWidth()/2 - this.getIndWidth()/2, 300 + this.getIndHeight()/2, 400 + this.getBoardWidth()/2,
 			300 + this.getIndHeight()/2);
+				break;
+			case 5:
+				g.drawString("BOMB", 100 + this.getBoardWidth()/2, 350 + this.getIndHeight()/2);
+				break;
+			case 6:
+				g.drawString("DEFUSE BOMB", 100 + this.getBoardWidth()/2, 400 + this.getIndHeight()/2);
+				break;
+			case 7:
+				g.drawString("SPILL", 100 + this.getBoardWidth()/2, 450 + this.getIndHeight()/2);
+				break;
+			case 8:
+				g.drawString("CLEAN SPILL", 100 + this.getBoardWidth()/2, 500 + this.getIndHeight()/2);
+				break;
+			case 9:
+				g.drawString("REMOVE PATH", 100 + this.getBoardWidth()/2, 550 + this.getIndHeight()/2);
+				break;
+			case 10:
+				g.drawString("ROTATE PATH", 100 + this.getBoardWidth()/2, 600 + this.getIndHeight()/2);
 				break;
 			default:
 				System.out.println("Should not see this");
