@@ -45,6 +45,7 @@ public class Board implements Observer{
 		String[][] board = new String[this.getRows() + 1][this.getColumns() + 1];
 		this.setTreasureArray(treasureArray);	
 		this.setBoard(board);
+		
 	}
 
 	@Override
@@ -57,59 +58,60 @@ public class Board implements Observer{
 						/ ((DrawRectangle) this.getLayer().getBoard()).getIndWidth() + 1);
 				System.out.println(clickXCoordinate +" , "+ clickYCoordinate);
 				
-				if(this.getClickYCoordinate() > this.getRows()){
-					if(this.getClickYCoordinate() <= this.getRows() + 3){
+				if(this.getClickXCoordinate() > this.getColumns()){
+					if(this.getClickYCoordinate() <= 2){
 						System.out.println("You selected a PLUS!");
-						card = new DrawPathCard("PLUS");
+						card = new DrawPathCard("PLUS", true);
 					}
-					else if(this.getClickYCoordinate() <= this.getRows() + 5){
+					else if(this.getClickYCoordinate() <= 4){
 						System.out.println("You selected a LINE!");
-						if(this.getClickXCoordinate() == 2){
+						if(this.getClickXCoordinate() == this.getRows() + 2){
 							System.out.println(" and it is vertical");
-							card = new DrawPathCard("VLINE");
+							card = new DrawPathCard("VLINE", true);
 						}
 						else{
 							System.out.println(" and it is horizontal");
-							card = new DrawPathCard("HLINE");
+							card = new DrawPathCard("HLINE", true);
 						}
 					}
-					else if(this.getClickYCoordinate() <= this.getRows() + 7){
+					else if(this.getClickYCoordinate() <= 5){
 						System.out.println("You selected a SEVEN!");
-						if(this.getClickXCoordinate() == 2){
+						if(this.getClickXCoordinate() == this.getRows() + 2){
 							System.out.println(" and it is upright");
-							card = new DrawPathCard("USEVEN");
+							card = new DrawPathCard("USEVEN", true);
 						}
-						else if(this.getClickXCoordinate() <= 4){
+						else if(this.getClickXCoordinate() == this.getRows() + 3){
 							System.out.println(" and it is upside down");
-							card = new DrawPathCard("UDSEVEN");
+							card = new DrawPathCard("UDSEVEN", true);
 						}
-						else if(this.getClickXCoordinate() == 5){
+						else if(this.getClickXCoordinate() <= this.getRows() + 5){
 							System.out.println(" and it is upside down with reverse horizontal");
-							card = new DrawPathCard("UDRSEVEN");
+							card = new DrawPathCard("UDRSEVEN", true);
 						}
 						else{
 							System.out.println(" and it is a mirror image");
-							card = new DrawPathCard("UMSEVEN");
+							card = new DrawPathCard("UMSEVEN", true);
 						}
 					}
 					else{
 						System.out.println("You selected a T!");
-						if(this.getClickXCoordinate() <= 2){
+						if(this.getClickXCoordinate() <= this.getRows() + 3){
 							System.out.println("and it is Upright!");
-							card = new DrawPathCard("UT");
+							card = new DrawPathCard("UT", true);
 						}
-						else if(this.getClickXCoordinate() <= 4){
+						else if(this.getClickXCoordinate() <= this.getRows() + 5){
 							System.out.println("and it is Upside Down!");
-							card = new DrawPathCard("UDT");
+							card = new DrawPathCard("UDT", true);
 						}
-						else if(this.getClickXCoordinate() <= 6){
+						else if(this.getClickXCoordinate() <= this.getRows() + 6){
 							System.out.println("and it is rotated colckwise");
-							card = new DrawPathCard("CRT");
+							card = new DrawPathCard("CRT", true);
 						}
 						else{
 							System.out.println("and it is rotated anti-colckwise");
-							card = new DrawPathCard("ART");
+							card = new DrawPathCard("ART", true);
 						}
+
 					}
 					PositionSelection positions = new PositionSelection();
 					JFrame optionsPanel = new JFrame();

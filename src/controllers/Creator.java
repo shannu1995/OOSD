@@ -56,7 +56,7 @@ public class Creator extends JFrame{
 	    }
 	    crossComponent = new DrawCross(totalWidth, totalHeight,IND_WIDTH, IND_HEIGHT, FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, treasureArray, NUMBER_OF_SPOTS);
 	    JComponent start = new DrawStart(FIRST_RECTANGLE_X, FIRST_RECTANGLE_Y, IND_WIDTH, IND_HEIGHT, width, height);
-	    JComponent playerView = new PlayerView(totalHeight, IND_WIDTH, IND_HEIGHT);
+	    JComponent playerView = new PlayerView(totalWidth, totalHeight, IND_WIDTH, IND_HEIGHT);
 	    BoardLayer layer = new BoardLayer(totalWidth, totalHeight, boardComponent, crossComponent, start, playerView);
 	    
 		layer.setVisible(true);
