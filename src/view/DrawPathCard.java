@@ -4,133 +4,131 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
+import models.ActionCard;
+import models.PathCard;
+
 public class DrawPathCard extends JComponent{
-	private String type;
-	private int xPosition;
-	private int yPosition;
-	private int indWidth;
-	private int indHeight;
-	private int firstRectangleX;
-	private int firstRectangleY;
 	private boolean selection;
+	private PathCard card;
 	
-	public DrawPathCard(String type, boolean selection){
-		this.setType(type);
+	public DrawPathCard(PathCard pathCard, boolean selection){
+		this.setCard(pathCard);
 		this.setSelection(selection);
 		setSize(1000, 1000);
 	}
 	public void paint(Graphics g){
+		System.out.println("Why isn\'t the type: "+this.getCard().getType()+" printing?");
 		if(selection == true){
-				switch(this.getType()){
+				switch(this.getCard().getType()){
 				case "PLUS":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
-							this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
-							(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
-							this.getFirstRectangleY() + (this.getyPosition()* this.getIndHeight()));				
-					g.drawLine(this.getFirstRectangleX() + ((this.getxPosition() - 1) * this.getIndWidth()), 
-							this.getFirstRectangleY()+ ((this.getyPosition() - 1) * this.getIndHeight()+ (this.getIndHeight()/2)),
-							this.getFirstRectangleX() + (this.getxPosition() * indWidth), 
-							this.getFirstRectangleY()+ ((this.getyPosition() - 1) * this.getIndHeight()+ (this.getIndHeight()/2)));
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth() + (this.getCard().getIndWidth() / 2),
+							this.getCard().getFirstRectangleY() + ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()),
+							(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()) + (this.getCard().getIndWidth()/ 2), 
+							this.getCard().getFirstRectangleY() + (this.getCard().getyPosition()* this.getCard().getIndHeight()));				
+					g.drawLine(this.getCard().getFirstRectangleX() + ((this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()), 
+							this.getCard().getFirstRectangleY()+ ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()+ (this.getCard().getIndHeight()/2)),
+							this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() * this.getCard().getIndWidth()), 
+							this.getCard().getFirstRectangleY()+ ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()+ (this.getCard().getIndHeight()/2)));
 					break;
 				case "VLINE":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
-							this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
-							(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
-							this.getFirstRectangleY() + (this.getyPosition()* this.getIndHeight()));
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth() + (this.getCard().getIndWidth() / 2),
+							this.getCard().getFirstRectangleY() + ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()),
+							(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()) + (this.getCard().getIndWidth()/ 2), 
+							this.getCard().getFirstRectangleY() + (this.getCard().getyPosition()* this.getCard().getIndHeight()));
 					break;
 				case "HLINE":
-					g.drawLine(this.getFirstRectangleX() + ((this.getxPosition() - 1) * this.getIndWidth()), 
-							this.getFirstRectangleY()+ ((this.getyPosition() - 1) * this.getIndHeight()+ (this.getIndHeight()/2)),
-							this.getFirstRectangleX() + (this.getxPosition() * indWidth), 
-							this.getFirstRectangleY()+ ((this.getyPosition() - 1) * this.getIndHeight()+ (this.getIndHeight()/2)));
+					g.drawLine(this.getCard().getFirstRectangleX() + ((this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()), 
+							this.getCard().getFirstRectangleY()+ ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()+ (this.getCard().getIndHeight()/2)),
+							this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() * this.getCard().getIndWidth()), 
+							this.getCard().getFirstRectangleY()+ ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()+ (this.getCard().getIndHeight()/2)));
 					break;
 				case "USEVEN":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight()/2 + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					break;
 				case "UDSEVEN":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
-							this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
-							(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
-							this.getFirstRectangleY() - this.getIndHeight()/2 + (this.getyPosition()* this.getIndHeight()));
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth() + (this.getCard().getIndWidth() / 2),
+							this.getCard().getFirstRectangleY() + ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()),
+							(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()) + (this.getCard().getIndWidth()/ 2), 
+							this.getCard().getFirstRectangleY() - this.getCard().getIndHeight()/2 + (this.getCard().getyPosition()* this.getCard().getIndHeight()));
 					break;
 				case "UDRSEVEN":
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
-							this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
-							(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
-							this.getFirstRectangleY() - this.getIndHeight()/2 + (this.getyPosition()* this.getIndHeight()));
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth() + (this.getCard().getIndWidth() / 2),
+							this.getCard().getFirstRectangleY() + ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()),
+							(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()) + (this.getCard().getIndWidth()/ 2), 
+							this.getCard().getFirstRectangleY() - this.getCard().getIndHeight()/2 + (this.getCard().getyPosition()* this.getCard().getIndHeight()));
 					break;
 				case "UMSEVEN":
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight()/2 + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					break;
 				case "UT":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight()/2 + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					break;
 				case "UDT":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(),
-							this.getFirstRectangleY() + this.getIndHeight()/2 + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(),
+							this.getCard().getFirstRectangleY() + this.getCard().getIndHeight()/2 + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					break;
 				case "CRT":
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
-							this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
-							(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
-							this.getFirstRectangleY() + (this.getyPosition()* this.getIndHeight()));
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth() + (this.getCard().getIndWidth()/ 2),
+							this.getCard().getFirstRectangleY() + ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()),
+							(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()) + (this.getCard().getIndWidth()/ 2), 
+							this.getCard().getFirstRectangleY() + (this.getCard().getyPosition()* this.getCard().getIndHeight()));
 					break;
 				case "ART":
-					g.drawLine(this.getFirstRectangleX() + this.getIndWidth()/2 + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight(),
-							this.getFirstRectangleX() + this.getIndWidth() + (this.getxPosition() - 1) * this.getIndWidth(), 
-							this.getIndHeight()/2 + this.getFirstRectangleY() + (this.getyPosition() - 1) * this.getIndHeight());
+					g.drawLine(this.getCard().getFirstRectangleX() + this.getCard().getIndWidth()/2 + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight(),
+							this.getCard().getFirstRectangleX() + this.getCard().getIndWidth() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth(), 
+							this.getCard().getIndHeight()/2 + this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() - 1) * this.getCard().getIndHeight());
 					
-					g.drawLine(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth() + (indWidth / 2),
-							this.getFirstRectangleY() + ((this.getyPosition() - 1) * this.getIndHeight()),
-							(this.getFirstRectangleX() + (this.getxPosition() - 1) * this.getIndWidth()) + (this.getIndWidth()/ 2), 
-							this.getFirstRectangleY() + (this.getyPosition() * this.getIndHeight()));
+					g.drawLine(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth() + (this.getCard().getIndWidth() / 2),
+							this.getCard().getFirstRectangleY() + ((this.getCard().getyPosition() - 1) * this.getCard().getIndHeight()),
+							(this.getCard().getFirstRectangleX() + (this.getCard().getxPosition() - 1) * this.getCard().getIndWidth()) + (this.getCard().getIndWidth()/ 2), 
+							this.getCard().getFirstRectangleY() + (this.getCard().getyPosition() * this.getCard().getIndHeight()));
 					break;
 			}
 		}
@@ -138,52 +136,16 @@ public class DrawPathCard extends JComponent{
 			System.out.println("This should print!");
 		}
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public int getxPosition() {
-		return xPosition;
-	}
-	public void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
-	}
-	public int getyPosition() {
-		return yPosition;
-	}
-	public void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
-	}
-	public int getIndWidth() {
-		return indWidth;
-	}
-	public void setIndWidth(int indWidth) {
-		this.indWidth = indWidth;
-	}
-	public int getIndHeight() {
-		return indHeight;
-	}
-	public void setIndHeight(int indHeight) {
-		this.indHeight = indHeight;
-	}
-	public int getFirstRectangleX() {
-		return firstRectangleX;
-	}
-	public void setFirstRectangleX(int firstRectangleX) {
-		this.firstRectangleX = firstRectangleX;
-	}
-	public int getFirstRectangleY() {
-		return firstRectangleY;
-	}
-	public void setFirstRectangleY(int firstRectangleY) {
-		this.firstRectangleY = firstRectangleY;
-	}
 	public boolean isSelection() {
 		return selection;
 	}
 	public void setSelection(boolean selection) {
 		this.selection = selection;
+	}
+	public PathCard getCard() {
+		return card;
+	}
+	public void setCard(PathCard card) {
+		this.card = card;
 	}
 }

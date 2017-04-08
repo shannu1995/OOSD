@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import models.ActionCard;
+import models.PathCard;
 
 public class BoardLayer extends JFrame{
 	private int boardWidth;
@@ -97,12 +98,15 @@ public class BoardLayer extends JFrame{
 	public ArrayList<DrawPathCard> getPathCards() {
 		return pathCards;
 	}
-	public void setPathCards(ArrayList<DrawPathCard> pathCards) {
+	public void setPathCards(ArrayList<PathCard> pathCards) {
+		ArrayList<DrawPathCard> viewPathCards = new ArrayList<DrawPathCard>();
 		for(int i = 0; i < pathCards.size(); i++){
-			System.out.println("Once");
-			this.layers.add(pathCards.get(i), new Integer(4));
+			viewPathCards.add(new DrawPathCard(pathCards.get(i), true));
 		}
-		this.pathCards = pathCards;
+		for(int i = 0; i < pathCards.size(); i++){
+			this.layers.add(viewPathCards.get(i), new Integer(4));
+		}
+		this.pathCards = viewPathCards;
 	}
 	public ArrayList<DrawActionCard> getActionCards() {
 		return actionCards;

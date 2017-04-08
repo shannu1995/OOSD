@@ -28,8 +28,8 @@ public class Board implements Observer{
 	private int[][] treasureArray;
 	private int[] startSpot;
 	private PositionSelection positions;
-	private ArrayList<DrawPathCard> pathCards;
-	private DrawPathCard pathCard;
+	private ArrayList<PathCard> pathCards;
+	private PathCard pathCard;
 
 	private ArrayList<ActionCard> actionCards;
 	private ActionCard actionCard;
@@ -45,7 +45,7 @@ public class Board implements Observer{
 		this.setRows(((DrawRectangle) this.getLayer().getBoard()).getRows());
 		this.setColumns(((DrawRectangle) this.getLayer().getBoard()).getColumns());
 		this.setPlayerCount(playerCount);
-		ArrayList<DrawPathCard> pathCardsList = new ArrayList<DrawPathCard>();
+		ArrayList<PathCard> pathCardsList = new ArrayList<PathCard>();
 		this.setPathCards(pathCardsList);
 		ArrayList<ActionCard> acionCardsList = new ArrayList<ActionCard>();
 		this.setActionCards(acionCardsList);
@@ -70,18 +70,18 @@ public class Board implements Observer{
 				if(this.getClickXCoordinate() > this.getColumns()){
 					if(this.getClickYCoordinate() <= 2){
 						System.out.println("You selected a PLUS!");
-						pathCard = new DrawPathCard("PLUS", true);
+						pathCard = new PathCard("PLUS");
 						this.cardType = "PATH";
 					}
 					else if(this.getClickYCoordinate() <= 4){
 						System.out.println("You selected a LINE!");
 						if(this.getClickXCoordinate() == this.getRows() + 2){
 							System.out.println(" and it is vertical");
-							pathCard = new DrawPathCard("VLINE", true);
+							pathCard = new PathCard("VLINE");
 						}
 						else{
 							System.out.println(" and it is horizontal");
-							pathCard = new DrawPathCard("HLINE", true);
+							pathCard = new PathCard("HLINE");
 						}
 						this.cardType = "PATH";
 					}
@@ -89,19 +89,19 @@ public class Board implements Observer{
 						System.out.println("You selected a SEVEN!");
 						if(this.getClickXCoordinate() == this.getRows() + 2){
 							System.out.println(" and it is upright");
-							pathCard = new DrawPathCard("USEVEN", true);
+							pathCard = new PathCard("USEVEN");
 						}
 						else if(this.getClickXCoordinate() == this.getRows() + 3){
 							System.out.println(" and it is upside down");
-							pathCard = new DrawPathCard("UDSEVEN", true);
+							pathCard = new PathCard("UDSEVEN");
 						}
 						else if(this.getClickXCoordinate() <= this.getRows() + 5){
 							System.out.println(" and it is upside down with reverse horizontal");
-							pathCard = new DrawPathCard("UDRSEVEN", true);
+							pathCard = new PathCard("UDRSEVEN");
 						}
 						else{
 							System.out.println(" and it is a mirror image");
-							pathCard = new DrawPathCard("UMSEVEN", true);
+							pathCard = new PathCard("UMSEVEN");
 						}
 						this.cardType = "PATH";
 					}
@@ -109,19 +109,19 @@ public class Board implements Observer{
 						System.out.println("You selected a T!");
 						if(this.getClickXCoordinate() <= this.getRows() + 3){
 							System.out.println("and it is Upright!");
-							pathCard = new DrawPathCard("UT", true);
+							pathCard = new PathCard("UT");
 						}
 						else if(this.getClickXCoordinate() <= this.getRows() + 5){
 							System.out.println("and it is Upside Down!");
-							pathCard = new DrawPathCard("UDT", true);
+							pathCard = new PathCard("UDT");
 						}
 						else if(this.getClickXCoordinate() <= this.getRows() + 6){
 							System.out.println("and it is rotated colckwise");
-							pathCard = new DrawPathCard("CRT", true);
+							pathCard = new PathCard("CRT");
 						}
 						else{
 							System.out.println("and it is rotated anti-colckwise");
-							pathCard = new DrawPathCard("ART", true);
+							pathCard = new PathCard("ART");
 						}
 						this.cardType = "PATH";
 					}
@@ -294,23 +294,23 @@ public class Board implements Observer{
 		this.playerCount = playerCount;
 	}
 
-	public ArrayList<DrawPathCard> getPathCards() {
+	public ArrayList<PathCard> getPathCards() {
 		return pathCards;
 	}
 
-	public void setPathCards(ArrayList<DrawPathCard> pathCards) {
+	public void setPathCards(ArrayList<PathCard> pathCards) {
 		this.pathCards = pathCards;
 	}
 
-	public DrawPathCard getPathCard() {
+	public PathCard getPathCard() {
 		return pathCard;
 	}
 
-	public void setCard(DrawPathCard card) {
+	public void setCard(PathCard card) {
 		this.pathCard = card;
 	}
-	public void addPathCard(DrawPathCard card){
-		ArrayList<DrawPathCard> cards = this.getPathCards();
+	public void addPathCard(PathCard card){
+		ArrayList<PathCard> cards = this.getPathCards();
 		cards.add(card);
 		this.setPathCards(cards);
 	}
